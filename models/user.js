@@ -121,7 +121,7 @@ class User {
    *
    * Returns { username, first_name, last_name, is_admin, jobs }
    *   where jobs is { id, title, company_handle, company_name, state }
-   *
+   *  FIXME: not what this does
    * Throws NotFoundError if user not found.
    **/
 
@@ -141,7 +141,7 @@ class User {
     if (!user) throw new NotFoundError(`No user: ${username}`);
 
     const userApplicationsRes = await db.query(`
-        SELECT a.job_id
+        SELECT a.job_id AS "jobId"
         FROM applications AS a
         WHERE a.username = $1`, [username]);
 
